@@ -12,9 +12,9 @@ The goal of the project is to have a motorized wheelchair that would be controll
 ***
 ## 2.0 Hardware Set-up
 There are 4 main componets
-  2x wheel modules (Teensy 3.6)
-  1x main controller (Raspberry Pi 3B+)
-  1x motor controller (Roboteq SBL2360)
+*2x wheel modules (Teensy 3.6)
+*1x main controller (Raspberry Pi 3B+)
+*1x motor controller (Roboteq SBL2360)
 
 ### 2.1 Wheel Modules
 The function of the wheel modules are to get users input and transmit the input data to the main controller via bluetooth.
