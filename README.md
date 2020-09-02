@@ -19,7 +19,7 @@ There are 4 main componets
 
 ### 2.1 Wheel Modules
 The function of the wheel modules are to get users input and transmit the input data to the main controller via bluetooth.
-The main componets of the wheel modules are
+The main componets of the wheel modules are   
 1x Teensy 3.6 micro-controller    
 1x hall effect sensor   
 1x HC-05 bluetooth module   
