@@ -65,12 +65,17 @@ Switching mode: "Trapazoidal" or "Sinusoidal"
 ***
 ## 3.0 Code
 Two scrips are available to run the system in either closed loop speed mode or torque mode.   
-Both scrips start off by starting a serial connection with a Roboteq motor controller and sending out initialization commands such as: Operating mode, Acceleration, power limit, amp limit, watch dog timeout and more. Next bluetooth connections are initiated on separate threads, bluetooth bufferes are cleared and user input (hall sensor readings) data are ready to be polled.
+Both scrips start off by starting a serial connection with a Roboteq motor controller and sending out initialization commands such as: Operating mode, Acceleration, power limit, amp limit, watch dog timeout and more. Next bluetooth connections are initiated on separate threads, bluetooth bufferes are cleared and user input (hall sensor readings) data are ready to be polled.    
 The hall sensor voltage reading is mapped (in Teensy code) to -4096 upto 4096 value range. At rest the hall sensor does not sit at exactly zero but some offset value. Calibration is done on Raspberry Pi by saving the first value as "offset" from each hall sensor befor starting a control loop. This offset value is then subtracted from every subsequit reading polled.   
-In a control loop user input date is polled, corrected for offset and converted into a speed command or a torque command. Conversion to a speed or torque command is as simple as scaling the value down to -1000 upto 1000 range and including this value in a command. Commands are generated for each wheel independatly, these commands are stored in list (commandsList) then this list is sent into a function (sentCommandsList). This function sends this commands over serial to roboteq with a delay and reply read between each command.
+In a control loop user input date is polled, corrected for offset and converted into a speed command or a torque command. Conversion to a speed or torque command is as simple as scaling the value down to -1000 upto 1000 range and including this value in a command. Commands are generated for each wheel independatly, these commands are stored in list (commandsList) then this list is sent into a function (sentCommandsList). This function sends this commands over serial to roboteq with a delay and reply read between each command.   
+Roboteq can react to a command within 16ms, that is the delay added in to code between each command. Roboteq replys to Runtime commands with "+" when command is acknoledged. This reply is read (to clear the buffer) each time and not stored.    
 
+***
 
-### 3.1 Torque Control Code
+## 4.0 Future Work    
+### 4.1 Software Work   
+The torque from the motors doesn't feel natural, sometimes it works and other times the torque comes in very ubruptly and causes the wheels to slip from excessive torque. This can possibly be resolved with sufficent tuning of PID and Acceleration setting. For better ability to troubleshoot and for tuning reasons it would be helpful to have amps readout from each motor desplyed on the console along with commands sent.    
 
-
-
+### 4.2 Hardware Deficiencies   
+The hall sensor are not idential, the at rest reading (offset value) is very different from one to another. Left sensor is reading +300 and Right sensor is reading -700 out of -4096 to 4096 range. Also it seems like left sensor is very sensative in the negative direction. All of this combined might result in two wheels feeling different requiring user to use more force on one side than another or just unable to drive in a straight line.    
+Also Roboteq motor controller does not seem to have a function to turn off regen. The only way to truly turn off regen is "emergency stop" command. And at this point both wheels are free to coast, however if one wheel motor needs to be engauged to correct course the other wheel also engauges in a regen mode. Effectivly resulting in one wheel accelerating while the other wheel is decelerating. Even in torque mode when 0 amps set as target for current draw, the motors generate current if wheels are rotated. This might result in a wheelchair that is good at going uphill or straight line, but feels heavy clubersum in a tight corners, as chair is not able to turn easyly with regen on both wheels.
