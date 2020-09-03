@@ -48,10 +48,10 @@ Roboteq SBL2360 motor controller can be configured in "Closed loop speed mode" a
 To use this motor controller in "torque mode", the "switching mode" for both motors has to be configured for "sinusoidal setting".
 For "closed loop speed mode" ether Trapazoidal or Sinusoidal switching modes will work.
 
-Motor controller prametes
+Motor controller prametes   
 Number of polls: 23    
-Closed loop feedback sensor: Hall Sensor
-Switching mode: "Trapazoidal" or "Sinusoidal"
+Closed loop feedback sensor: Hall Sensor    
+Switching mode: "Trapazoidal" or "Sinusoidal"   
 
 | Number | Location | Motor Direction | Hall Sensor Map |
 | :----: | :------: | :-------------: | :-------------: |
