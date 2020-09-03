@@ -1,0 +1,46 @@
+syntax = 'proto3';
+
+message frameUnit{
+	double time_stamp=1;
+	
+	enum Sensor {
+		IMU_9 = 0;
+		IMU_6 = 1;
+		HALL = 3;
+	}
+	
+	Sensor sensorType = 2;
+	
+	float acc_x = 3;
+	float acc_y = 4;
+	float acc_z = 5;
+	float angular_x = 6;
+	float angular_y = 7;
+	float angular_z = 8;
+
+	float hall = 9;
+
+	float mag_x = 10;
+	float mag_y = 11;
+	float mag_z = 12;
+	
+	float heading = 13;
+	float pitch = 14;
+	float roll = 15;
+
+	
+}
+
+message wheelUnit{
+	float time_stamp=1;
+	bool isStamp = 2;
+
+	float acc_x = 3;
+	float acc_y = 4;
+	float acc_z = 5;
+	float angular_x = 6;
+	float angular_y = 7;
+	float angular_z = 8;
+
+	float hall = 9;
+}
