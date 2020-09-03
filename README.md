@@ -46,7 +46,11 @@ The function of the main controller is to send initialization commands to Robote
 The fuction of the motor controller is to continusly receive stream of serial commands from DB25 port and power the motors acording to the commands received.
 Roboteq SBL2360 motor controller can be configured in "Closed loop speed mode" and "Torque mode".   
 To use this motor controller in "torque mode", the "switching mode" for both motors has to be configured for "sinusoidal setting".
-For "closed loop speed mode" ether Trapazoidal or Sinusoidal switching modes will work.
+For "closed loop speed mode" ether Trapazoidal or Sinusoidal switching modes will work.   
+
+In torque control mode commands are sent to motor controller for a trager current draw for each motor. Motor controller has a setting for current ramp up, how fast the currect draw is rasid. This setting can be configured between 1mA/s up to 500,000mA/s this is the upper limit. Withing this upper limit motor controller also has PID setting to configure how this target current draw is achived.
+
+In closed loop speed mode commands are sent to motor controller for a traget RPM speed for each wheel. Motor controller has a setting for maxium speed in RPM and acceleration in RPM/s. The setting for maximum RPM is for the scaling purposes only, this will not limit the speed of the motors if a 110% of the maximum speed is set as traget. PID setting also apply here.
 
 Motor controller prametes   
 Number of polls: 23    
@@ -58,6 +62,15 @@ Switching mode: "Trapazoidal" or "Sinusoidal"
 | 1      | LEFT     | Direct          | 1               |
 | 2      | RIGHT    | Inverted        | 5               |
 
+***
+## 3.0 Code
+Two scrips are available to run the system in either closed loop speed mode or torque mode.   
+Both scrips start off by starting a serial connection with a Roboteq motor controller and sending out initialization commands such as: Operating mode, Acceleration, power limit, amp limit, watch dog timeout and more. Next bluetooth connections are initiated on separate threads, bluetooth bufferes are cleared and user input (hall sensor readings) data are ready to be polled.
+The hall sensor voltage reading is mapped (in Teensy code) to -4096 upto 4096 value range. At rest the hall sensor does not sit at exactly zero but some offset value. Calibration is done on Raspberry Pi by saving the first value as "offset" from each hall sensor befor starting a control loop. This offset value is then subtracted from every subsequit reading polled.   
+In a control loop user input date is polled, corrected for offset and converted into a speed command or a torque command. Conversion to a speed or torque command is as simple as scaling the value down to -1000 upto 1000 range and including this value in a command. Commands are generated for each wheel independatly, these commands are stored in list (commandsList) then this list is sent into a function (sentCommandsList). This function sends this commands over serial to roboteq with a delay and reply read between each command.
+
+
+### 3.1 Torque Control Code
 
 
 
