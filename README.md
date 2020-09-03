@@ -44,6 +44,20 @@ The function of the main controller is to send initialization commands to Robote
 
 ### 2.3 Motor Controller
 The fuction of the motor controller is to continusly receive stream of serial commands from DB25 port and power the motors acording to the commands received.
+Roboteq SBL2360 motor controller can be configured in "Closed loop speed mode" and "Torque mode".   
+To use this motor controller in "torque mode", the "switching mode" for both motors has to be configured for "sinusoidal setting".
+For "closed loop speed mode" ether Trapazoidal or Sinusoidal switching modes will work.
+
+Motor controller prametes
+Number of polls: 23    
+Closed loop feedback sensor: Hall Sensor
+Switching mode: "Trapazoidal" or "Sinusoidal"
+
+| Number | Location | Motor Direction | Hall Sensor Map |
+| :----: | :------: | :-------------: | :-------------: |
+| 1      | LEFT     | Direct          | 1               |
+| 2      | RIGHT    | Inverted        | 5               |
+
 
 
 
