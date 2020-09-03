@@ -71,7 +71,6 @@ In a control loop user input date is polled, corrected for offset and converted 
 Roboteq can react to a command within 16ms, that is the delay added in to code between each command. Roboteq replys to Runtime commands with "+" when command is acknoledged. This reply is read (to clear the buffer) each time and not stored.    
 
 ***
-
 ## 4.0 Future Work    
 ### 4.1 Software Work   
 The torque from the motors doesn't feel natural, sometimes it works and other times the torque comes in very ubruptly and causes the wheels to slip from excessive torque. This can possibly be resolved with sufficent tuning of PID and Acceleration setting. For better ability to troubleshoot and for tuning reasons it would be helpful to have amps readout from each motor desplyed on the console along with commands sent.    
