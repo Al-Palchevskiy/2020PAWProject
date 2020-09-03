@@ -27,9 +27,9 @@ The main componets of the wheel modules are
 The hall effect sensor is used to get users input. The hall effect voltage reading is converted using 13bit resolution ADC with 1.2 for refereance. The 13bit unsigned value is then remapped to a 12bit signed value. The input data is then packaged using serialized data struture "Proto Buffers", encoded using "COBS" and sent over bluetooth.    
 HC-05 bluetooth module is connected to Teensy's Serial1 port, the data that is writen to Serial1 gets sent over bluetooth.
 
-Bluetooth Paramters of HC-05 modules
-Baudrate 230400 bit/s
-Slave mode
+Bluetooth Paramters of HC-05 modules    
+Baudrate 230400 bit/s   
+Slave mode    
 
 | Module | Name        | Bluetooth Address | Pin  |
 | :----: | :---------: | :---------------: | :--: |
