@@ -1,1 +1,2 @@
-ATcommands is script to read parameters of the HC-05 bluetooth module when connected to Teensy 3.6 with Serial1 port
+ATcommands is script to read parameters of the HC-05 bluetooth module when connected to Teensy 3.6 with Serial1 port    
+To make changes to HC-05 parameters, HC-05 needs to be booted into "AT Command mode" To do this hold down the button on the HC-05 module as Teensy is powered up. Then you can upload and run ATcommands.ino script on Teensy. This script print out current parameters of HC-05 module. To change parameters feel free to add own lines to the script. Once done, reload teensyClient.ino to Teensy.
